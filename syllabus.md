@@ -1,3 +1,4 @@
+All examples are from Codecademy
 1   Python Syntax
 2   Strings and Console Output
 3   Conditionals and Control Flow
