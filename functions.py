@@ -151,3 +151,123 @@ def rental_car_cost(days):
   return rental_car_cost(days) + hotel_cost(days) + plane_ride_cost(city) + spending_money
 
 print trip_cost("Los Angeles", 5, 600)
+
+
+######### 7: Lists & Functions ##########
+n = [1, 3, 5]
+n[1] *= 5
+print n  # => [1, 15, 5]
+
+# Removing items by index or by item name/value
+n.pop(1)  # => removes the item at INDEX 1:  n = [1, 5]
+n.remove(1)  # => removes the actual item: n = [3, 5]
+
+# --- --- --- ---
+n = [3, 5, 7]
+
+def print_list(x):
+  for i in range(0, len(x)):
+    print x[i]
+
+print print_list(n)
+
+# WHEN TO USE for item in list VERSUS for i in range(len(list)):
+# Method 1 - for item in list:
+for item in list:
+  print item
+
+#Method 2 - iterate through indexes:
+for i in range(len(list)):
+  print list[i]
+
+#Method 1 is useful to loop through the list, but it's not possible to modify the list this way.
+
+#Method 2 uses indexes to loop through the list, making it POSSIBLE TO MODIFY THE LIST IF NEEDED. Since we aren't modifying the list, feel free to use either one on this lesson!
+
+
+# Concatenating Lists:
+n = [[1, 2, 3], [4, 5, 6, 7, 8, 9]]
+
+def flatten(lists):
+    results = []
+    for numbers in lists:
+        for number in numbers:
+            results.append(number)
+    return results
+
+print flatten(n)
+
+########### BATTLESHIP GAME ##############
+board = []
+for i in range(5):
+    board.append(['O'] * 5)
+
+def print_board(board_in):
+  for row in board_in:
+    print row
+
+print_board(board)
+
+# ['O', 'O', 'O', 'O', 'O']
+# ['O', 'O', 'O', 'O', 'O']
+# ['O', 'O', 'O', 'O', 'O']
+# ['O', 'O', 'O', 'O', 'O']
+# ['O', 'O', 'O', 'O', 'O']
+
+# Edited to remove commas and brackets:
+def print_board(board_in):
+    for row in board_in:
+        print " ".join(row)
+
+# O O O O O
+# O O O O O
+# O O O O O
+# O O O O O
+# O O O O O
+
+from random import randint
+
+def random_row(board_in):
+    return randint(0, len(board_in) - 1)
+
+def random_col(board_in):
+    return randint(0, len(board_in) - 1)
+
+ship_row = random_row(board)
+ship_col = random_col(board)
+# print ship_row for testing
+# print ship_col for testing
+
+# Allow player to take 4 turns before game ends
+for turn in range(4):
+    print "Turn", turn + 1
+    guess_row = int(raw_input("Guess Row:"))
+    guess_col = int(raw_input("Guess Col:"))
+
+    # If guess is correct
+    if guess_row == ship_row and guess_col == ship_col:
+        print "Congratulations! You sunk my battleship!"
+        break
+    else:
+        # If guess is 'off the board'
+        # Note: alternative check method:
+        # elif guess_row not in range(5) or guess_col not in range(5):
+        if (guess_row < 0 or guess_row > 4) or (guess_col < 0 or guess_col > 4):
+            print "Oops, that's not even in the ocean."
+        # If guess is a repeat
+        elif(board[guess_row][guess_col] == "X"):
+            print "You guessed that one already."
+        else:
+            print "You missed my battleship!"
+            board[guess_row][guess_col] = "X"
+    print_board(board)
+    if turn == 3:
+        print "Game Over"
+
+# Suggestions for additional features and complexity
+"""
+1. Make multiple battleships: you'll need to be careful because you need to make sure that you don’t place battleships on top of each other on the game board. You'll also want to make sure that you balance the size of the board with the number of ships so the game is still challenging and fun to play.
+2. Make battleships of different sizes: this is trickier than it sounds. All the parts of the battleship need to be vertically or horizontally touching and you’ll need to make sure you don’t accidentally place part of a ship off the side of the board.
+3. Make your game a two-player game.
+4. Use functions to allow your game to have more features like rematches, statistics and more!
+"""
