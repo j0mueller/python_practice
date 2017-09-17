@@ -217,8 +217,15 @@ print to_five[:2]  # start at index 0 and go up to 2 (excl)
 print to_five[::2]  # starts at 0 and goes to end by 2's
 # print ['A', 'C', 'E']
 
+garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+message = garbled[::-2]
+print message # => I am the secret message!
 
-# 23. 
+
+# 23.
 to_21 = [x for x in range(1, 22)]
 odds = to_21[::2]
 middle_third = to_21[7:14]
+
+
+threes_and_fives = [x for x in range(1, 16) if (x % 3 == 0) or (x % 5 == 0)]
